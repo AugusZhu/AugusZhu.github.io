@@ -81,13 +81,13 @@
 
 <meta name="description" content="知行合一">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="艺术与杂谈">
 <meta property="og:url" content="http://yoursite.com/archives/2019/08/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="艺术与杂谈">
 <meta property="og:description" content="知行合一">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="艺术与杂谈">
 <meta name="twitter:description" content="知行合一">
 
 
@@ -124,7 +124,7 @@
 
 
 
-  <title>归档 | Hexo</title>
+  <title>归档 | 艺术与杂谈</title>
   
 
 
@@ -154,12 +154,12 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hexo</span>
+        <span class="site-title">艺术与杂谈</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <p class="site-subtitle">知行合一</p>
       
   </div>
 
@@ -208,7 +208,23 @@
 
 
 
- </div>
+
+<script>
+	
+	window.onload = function(){
+		var path = 'https://malizhi.cn'; //这里要改成你博客的地址
+		var localhostItem = String(window.location).split(path)[1];
+		var LiNode = document.querySelectorAll('#menu > li > a')
+		
+		for(var i = 0; i< LiNode.length;i++){
+			var item = String(LiNode[i].href).split(path)[1];
+			if(item == localhostItem && item != undefined){
+				LiNode[i].setAttribute('style','border-bottom:1px solid black');
+			}
+		}
+	};
+
+</script> </div>
     </header>
 
     <main id="main" class="main">
