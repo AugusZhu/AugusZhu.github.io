@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>夏木の博客</title>
+  
+  <subtitle>知行合一</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://feyfey.online/"/>
+  <updated>2019-08-24T13:27:56.412Z</updated>
+  <id>http://feyfey.online/</id>
+  
+  <author>
+    <name>AugusZhu</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>weblogic12c集群搭建</title>
+    <link href="http://feyfey.online/2019/08/24/weblogic12c%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/"/>
+    <id>http://feyfey.online/2019/08/24/weblogic12c集群搭建/</id>
+    <published>2019-08-23T19:23:00.000Z</published>
+    <updated>2019-08-24T13:27:56.412Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="weblogic12c集群搭建"><a href="#weblogic12c集群搭建" class="headerlink" title="weblogic12c集群搭建"></a>weblogic12c集群搭建</h1><h2 id="环境配置111"><a href="#环境配置111" class="headerlink" title="环境配置111"></a>环境配置111</h2><table><thead><tr><th>服务器名</th><th>监听地址</th><th>监听端口</th><th>备注</th></tr></thead><tbody><tr><td>AdminServer (管理)</td><td>10.40.128.182</td><td>7001</td><td>管理服务器</td></tr><tr><td>proxy-server</td><td>10.40.128.182</td><td>8080</td><td>代理服务器</td></tr><tr><td>Server-0</td><td>10.40.128.182</td><td>9002</td><td>受管服务器</td></tr><tr><td>Server-1</td><td>10.40.128.183</td><td>9002</td><td>受管服务器</td></tr></tbody></table><h2 id="启动管理服务器"><a href="#启动管理服务器" class="headerlink" title="启动管理服务器"></a>启动管理服务器</h2><p>进去创建的域所在目录，执行<code>nohup ./bin/startWeblogic.sh &amp;</code> <br><br>进入控制台<a href="http://10.40.128.182:7001/console" target="_blank" rel="noopener">http://10.40.128.182:7001/console</a></p><h2 id="配置服务器"><a href="#配置服务器" class="headerlink" title="配置服务器"></a>配置服务器</h2><ul><li>点击环境-&gt;服务器-&gt;新建<br><br><img src="/images/pasted-4.png" alt="weblogic8"></li><li>输入服务器地名Server-0，主机IP 10.40.128.182，端口号 9002 集群不用选择<br><br><img src="/images/pasted-5.png" alt="weblogic9"></li><li>同理，配置好Server-1，proxy-server<br></li></ul><p>##创建集群</p><ul><li>点击环境-&gt;集群-&gt;新建-&gt;集群</li><li>选择多点传送，不用管多点传送地址<br><img src="/images/pasted-6.png" alt="weblogic10"></li><li>点击确定</li></ul><p>##创建计算机</p><ul><li>创建计算机以配置节点管理器</li><li>点击环境-&gt;计算机-&gt;新建，输入计算机名称，操作系统类型<br><br><img src="/images/pasted-7.png" alt="weblogic11"></li><li>将连接类型设为普通，监听地址改为10.40.128.182<br><img src="/images/pasted-8.png" alt="weblogic12"></li><li>点击确定</li></ul><p>##配置受管服务器的计算机和集群</p><ul><li>点击环境-&gt;服务器，点击服务server-0</li><li>配置计算机和集群信息<br><img src="/images/pasted-9.png" alt="weblogic13"></li><li>同理配置Server-1，proxy-server 但是procy-server不需要配置集群。</li></ul><p>##启动节点管理器<br>进入创建的域所在的目录，执行<br><br><code>nohup ./bin/startNodeManager.sh &gt; nodeManager.log 2&gt;&amp;1 &amp;</code></p><p>##配置代理服务器<br>进入weblogic目录下 ./wlserver/common/bin/<br>执行<code>./config.sh</code><br><br>选择更新现有配置。<br><br>创建代理服务器，服务器选择proxy-server。<br><br><img src="/images/pasted-10.png" alt="weblogic14"><br>进入所在域的目录，进入./apps/OracleProxy4_Cluster-0_proxy-server/WEB-INF,修改weblogic.xml。<br><br>修改如图参数为项目的上下文。<br><br><img src="/images/pasted-11.png" alt="weblogic15"><br>然后部署更新代理服务器项目。</p><p>##启动服务器<br>复制10.40.128.182上域所在目录，到10.40.128.183下。<br><br>启动183的weblogic。<br><br>在182执行 <code>./bin/startManagedWeblogic.sh proxy-server http://10.40.128.182:7001</code><br><br><code>./bin/startManagedWeblogic.sh Server-0 http://10.40.128.182:7001</code><br><br>在183执行<br><br><code>./bin/startManagedWeblogic.sh Server-1 http://10.30.128.182:7001</code><br><br>可在<a href="http://10.40.128.182:7001/console" target="_blank" rel="noopener">http://10.40.128.182:7001/console</a>服务器上看到执行成功。<br><br>(/images/pasted-12.png)</p><p>##配置session复制<br>在项目的WEF-INF文件夹下新增weblogic.xml:</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE weblogic-web-app PUBLIC "-//BEA Systems, Inc.//DTD Web Application 8.1//EN"</span></span><br><span class="line"><span class="meta">        "http://www.bea.com/servers/wls810/dtd/weblogic810-web-jar.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">weblogic-web-app</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">session-descriptor</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">session-param</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>CookieName<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>JSESSIONID1<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">session-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">session-param</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>PersistentStoreType<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>replicated_if_clustered<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">session-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">session-descriptor</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">weblogic-web-app</span>&gt;</span></span><br></pre></td></tr></table></figure><p>##完成<br>部署项目，完成后。访问<a href="http://10.40.128.182:8080/core" target="_blank" rel="noopener">http://10.40.128.182:8080/core</a></p><p>###踩坑</p><ul><li>后台免密启动受管服务器<br>进入sercers文件夹下需要免密启动的服务器文件夹，进入security目录，创建boot.properties。<br>格式为：</li></ul><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">username</span>=weblogic</span><br><span class="line"><span class="attr">password</span>=weblogic</span><br></pre></td></tr></table></figure><p>首次启动后自动会被加密<br></p><ul><li><p>报错信息如下：<br><img src="/images/pasted-13.png" alt="weblogic17"><br>启动时未能连接到管理服务器。可能是节点管理器未能启动的原因。需要先启动管理服务器上的节点管理器。<br><code>nohup ./startNodeManager.sh &gt; nodeManager.log 2&gt;&amp;1 &amp;</code>0v0</p></li><li><p>项目启动后发现点击登录后仍然跳转到登录页面不报错，怀疑是session复制的问题。经过研究发现是由于2台受管服务器连接的不是同一个redis。修改config.properties中redis.ip为其中一台服务器的ip。2台服务器的redis最好做一个主备。</p></li><li><p>websocket在weblogic服务器下无法使用，sockJs会自动切换到xhr-streaming协议。</p></li><li><p>项目启动后，登陆页面后跳转报错，提示服务器资源无法访问。由于weblogic在访问/时会自动跳转到/index.html，因此需要在页面注册注册index.html。<br><img src="/images/pasted-14.png" alt="weblogic18"></p></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;weblogic12c集群搭建&quot;&gt;&lt;a href=&quot;#weblogic12c集群搭建&quot; class=&quot;headerlink&quot; title=&quot;weblogic12c集群搭建&quot;&gt;&lt;/a&gt;weblogic12c集群搭建&lt;/h1&gt;&lt;h2 id=&quot;环境配置111&quot;&gt;&lt;a h
+      
+    
+    </summary>
+    
+      <category term="weblogic12c" scheme="http://feyfey.online/categories/weblogic12c/"/>
+    
+    
+      <category term="weblogic12c" scheme="http://feyfey.online/tags/weblogic12c/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Oracle修复系统包损坏</title>
+    <link href="http://feyfey.online/2019/08/21/Oracle%E4%BF%AE%E5%A4%8D%E7%B3%BB%E7%BB%9F%E5%8C%85%E6%8D%9F%E5%9D%8F/"/>
+    <id>http://feyfey.online/2019/08/21/Oracle修复系统包损坏/</id>
+    <published>2019-08-21T15:03:00.000Z</published>
+    <updated>2019-08-23T18:54:58.000Z</updated>
+    
+    <content type="html"><![CDATA[<h5 id="问题：项目上遇到了dbms-aq包损坏的情况，导致高级队列无法正常使用，oracle定时任务也无法启动。"><a href="#问题：项目上遇到了dbms-aq包损坏的情况，导致高级队列无法正常使用，oracle定时任务也无法启动。" class="headerlink" title="问题：项目上遇到了dbms_aq包损坏的情况，导致高级队列无法正常使用，oracle定时任务也无法启动。"></a>问题：项目上遇到了dbms_aq包损坏的情况，导致高级队列无法正常使用，oracle定时任务也无法启动。</h5><p><img src="/images/pasted-3.png" alt="upload successful"></p><h5 id="解决办法：oracle加密系统包损坏后无法通过单独编译包来恢复，需要使用内置脚本catproc-sql重新编译整个oracle的系统工具包。"><a href="#解决办法：oracle加密系统包损坏后无法通过单独编译包来恢复，需要使用内置脚本catproc-sql重新编译整个oracle的系统工具包。" class="headerlink" title="解决办法：oracle加密系统包损坏后无法通过单独编译包来恢复，需要使用内置脚本catproc.sql重新编译整个oracle的系统工具包。"></a>解决办法：oracle加密系统包损坏后无法通过单独编译包来恢复，需要使用内置脚本catproc.sql重新编译整个oracle的系统工具包。</h5><h5 id="操作方法："><a href="#操作方法：" class="headerlink" title="操作方法："></a>操作方法：</h5><ul><li>1 在oracle服务器上找到catproc.sql文件</li></ul><p><img src="/images/pasted-1.png" alt="upload successful"></p><ul><li>2 sqlplus下执行此脚本，执行时间可能较久</li></ul><p><img src="/images/pasted-2.png" alt="upload successful"></p><ul><li>3 修复完成后有些过程可能需要重新授权</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h5 id=&quot;问题：项目上遇到了dbms-aq包损坏的情况，导致高级队列无法正常使用，oracle定时任务也无法启动。&quot;&gt;&lt;a href=&quot;#问题：项目上遇到了dbms-aq包损坏的情况，导致高级队列无法正常使用，oracle定时任务也无法启动。&quot; class=&quot;headerl
+      
+    
+    </summary>
+    
+      <category term="Oracle" scheme="http://feyfey.online/categories/Oracle/"/>
+    
+    
+      <category term="Oracle" scheme="http://feyfey.online/tags/Oracle/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>本博客搭建指南</title>
+    <link href="http://feyfey.online/2019/08/20/%E6%9C%AC%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/"/>
+    <id>http://feyfey.online/2019/08/20/本博客搭建指南/</id>
+    <published>2019-08-20T14:16:50.000Z</published>
+    <updated>2019-08-20T14:16:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="构架"><a href="#构架" class="headerlink" title="构架"></a>构架</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hexo + Github Pages + Next</span><br></pre></td></tr></table></figure><p>参考网址: <a href="https://blog.csdn.net/tongyijia/article/details/52602587" target="_blank" rel="noopener">链接</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;构架&quot;&gt;&lt;a href=&quot;#构架&quot; class=&quot;headerlink&quot; title=&quot;构架&quot;&gt;&lt;/a&gt;构架&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span c
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
