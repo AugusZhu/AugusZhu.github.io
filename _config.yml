@@ -1,0 +1,146 @@
+# Hexo Configuration
+## Docs: https://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
+
+# Site
+title: 夏木の博客
+subtitle: 知行合一
+description: 知行合一
+keywords:
+author: AugusZhu
+language: zh-Hans
+timezone: Asia/Shanghai #中国的时区，不要乱改城市
+
+# URL
+## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
+url: http://feyfey.online
+root: /
+permalink: :year/:month/:day/:title/
+permalink_defaults:
+
+# Directory
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render:
+
+# Writing
+new_post_name: :title.md # File name of new posts
+default_layout: post
+titlecase: false # Transform title into titlecase
+external_link: true # Open external links in new tab
+filename_case: 0 #把博客名称改成小写/大写（1,2）
+render_drafts: false #是否显示草稿
+post_asset_folder: true  #是否启用资源文件夹（用来存放相对路径图片或文件）
+relative_link: false # 把链接改为与根目录的相对位址
+future: true
+highlight:
+  enable: true #是否开启代码高亮
+  line_number: true #是否增加代码行号
+  auto_detect: true #自动判断代码语言
+  tab_replace:
+  
+# Home page setting
+# path: Root path for your blogs index page. (default = '')
+# per_page: Posts displayed per page. (0 = disable pagination)
+# order_by: Posts order. (Order by date descending by default)
+index_generator:  #首页博客分布
+  path: ''
+  per_page: 10 #每页博客数量上限
+  order_by: -date #博客排序
+  
+# Category & Tag
+default_category: uncategorized
+category_map:
+tag_map:
+
+# Date / Time format
+## Hexo uses Moment.js to parse and display date
+## You can customize the date format as defined in
+## http://momentjs.com/docs/#/displaying/format/
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+
+# Pagination
+## Set per_page to 0 to disable pagination
+per_page: 10
+pagination_dir: page
+
+# Extensions
+## Plugins: https://hexo.io/plugins/
+## Themes: https://hexo.io/themes/
+theme: next
+scheme: Gemini
+#anguage: zh-Hans
+# Canvas-nest
+# Dependencies: https://github.com/theme-next/theme-next-canvas-nest
+canvas_nest: # 网络背景
+  enable: true
+  onmobile: true # display on mobile or not
+  color: '0,0,0' # RGB values, use ',' to separate
+  opacity: 0.5 # the opacity of line: 0~1
+  zIndex: -1 # z-index property of the background
+  count: 150 # the number of lines
+
+# JavaScript 3D library.
+# Dependencies: https://github.com/theme-next/theme-next-three
+# three_waves
+three_waves: false
+# canvas_lines
+canvas_lines: false
+# canvas_sphere
+canvas_sphere: false
+
+# Canvas-ribbon
+# Dependencies: https://github.com/theme-next/theme-next-canvas-ribbon
+# size: The width of the ribbon.
+# alpha: The transparency of the ribbon.
+# zIndex: The display level of the ribbon.
+canvas_ribbon:
+  enable: false
+  size: 300
+  alpha: 0.6
+  zIndex: -1
+
+
+menu:
+  home: / || home
+  archives: /archives/ || archive
+  about:  /about/ || user
+  schedule: /schedule
+  categories: /categories/ || th
+  search: /search
+  tags: /tags/ || tags
+  #commonweal: /404.html
+
+# Search 
+search:
+  path: ./public/search.xml
+  field: post
+  format: html
+  limit: 10000
+
+
+
+# Enable/Disable menu icons / item badges.
+menu_settings:
+  icons: true # 是否显示各个页面的图标
+  badges: true # 是否显示分类/标签/归档页的内容量
+
+# Deployment
+## Docs: https://hexo.io/docs/deployment.html
+deploy:
+  type: git
+  repo: https://github.com/AugusZhu/AugusZhu.github.io.git
+  branch: master
+
+# hexo-admin authentification
+admin:
+  username: feyfey
+  password_hash: $2a$10$uHApY8Sf05iVhwXqn63Qoe.M4/L.eP68EcRrFMSKNNkHeFbciMbn6
+  secret: feyfey1995..
+  deployCommand: 'hexo-pubish.bat'
