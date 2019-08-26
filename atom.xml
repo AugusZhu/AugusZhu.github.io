@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://feyfey.online/"/>
-  <updated>2019-08-24T13:31:33.597Z</updated>
+  <updated>2019-08-26T02:46:09.656Z</updated>
   <id>http://feyfey.online/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>新建工程并关联提交到Github</title>
+    <link href="http://feyfey.online/2019/08/26/%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B%E5%B9%B6%E5%85%B3%E8%81%94%E6%8F%90%E4%BA%A4%E5%88%B0Github/"/>
+    <id>http://feyfey.online/2019/08/26/新建工程并关联提交到Github/</id>
+    <published>2019-08-26T02:45:00.000Z</published>
+    <updated>2019-08-26T02:46:09.656Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li><p>cd进入你放项目文件的地址，我的地址在<strong>D:\WORK\项目程序</strong></p></li><li><p>输入<code>git init</code>  这个意思是在当前项目的目录中生成本地的git管理（会发现在当前目录下多了一个.git文件夹）</p></li><li><p>输入<code>git add</code>     这个是将项目上所有的文件添加到仓库中的意思，如果想添加某个特定的文件，只需把.换成这个特定的文件名即可。</p></li><li><p>输入<code>git commit -m &quot;first commit&quot;</code>表示你对这次提交的注释，双引号里面的内容可以根据个人的需要改。</p></li><li><p>输入<code>git remote add origin https://自己的gihub仓库url地址</code>,将本地的仓库关联到github上,这里本人输入的是<code>git remote add origin https://github.com/AugusZhu/JavaTools.git</code></p></li><li><p>输入<code>git push -u origin master</code>，这是把代码上传到github远程仓库</p><p><strong>踩坑注意</strong></p><ul><li><p>若第五步报错如下</p><p>To <a href="https://github.com/AugusZhu/JavaTools.git" target="_blank" rel="noopener">https://github.com/AugusZhu/JavaTools.git</a></p><p> ! [rejected]        master -&gt; master (fetch first)</p><p>error: failed to push some refs to ‘<a href="https://github.com/AugusZhu/JavaTools.git&#39;" target="_blank" rel="noopener">https://github.com/AugusZhu/JavaTools.git&#39;</a></p><p>原因：本地没有update到最新版本的项目（git上有README.md文件没下载下来）</p><p>解决办法：<code>git pull --rebase origin master</code>可以看到，此时已经把github上最新的文件下载下来了,</p><p>接着再  <code>git push origin master</code></p></li></ul></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ol&gt;
+&lt;li&gt;&lt;p&gt;cd进入你放项目文件的地址，我的地址在&lt;strong&gt;D:\WORK\项目程序&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;输入&lt;code&gt;git init&lt;/code&gt;  这个意思是在当前项目的目录中生成本地的git管理（会发现在当前目录下多了一
+      
+    
+    </summary>
+    
+      <category term="github" scheme="http://feyfey.online/categories/github/"/>
+    
+    
+      <category term="github" scheme="http://feyfey.online/tags/github/"/>
+    
+  </entry>
   
   <entry>
     <title>weblogic12c集群搭建</title>
