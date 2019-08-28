@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://feyfey.online/"/>
-  <updated>2019-08-26T02:46:09.656Z</updated>
+  <updated>2019-08-28T14:52:14.931Z</updated>
   <id>http://feyfey.online/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>手动删除数据库的dbf文件导致错误</title>
+    <link href="http://feyfey.online/2019/08/28/%E6%89%8B%E5%8A%A8%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84dbf%E6%96%87%E4%BB%B6%E5%AF%BC%E8%87%B4%E9%94%99%E8%AF%AF/"/>
+    <id>http://feyfey.online/2019/08/28/手动删除数据库的dbf文件导致错误/</id>
+    <published>2019-08-28T14:52:00.000Z</published>
+    <updated>2019-08-28T14:52:14.931Z</updated>
+    
+    <content type="html"><![CDATA[<h6 id="问题：清理服务器时，误删除了数据库的dbf文件，且未备份，导致今天在启动数据库时无法启动，经网上查找资料和参考，整理方法如下："><a href="#问题：清理服务器时，误删除了数据库的dbf文件，且未备份，导致今天在启动数据库时无法启动，经网上查找资料和参考，整理方法如下：" class="headerlink" title="问题：清理服务器时，误删除了数据库的dbf文件，且未备份，导致今天在启动数据库时无法启动，经网上查找资料和参考，整理方法如下："></a>问题：清理服务器时，误删除了数据库的dbf文件，且未备份，导致今天在启动数据库时无法启动，经网上查找资料和参考，整理方法如下：</h6><h6 id="操作步骤："><a href="#操作步骤：" class="headerlink" title="操作步骤："></a>操作步骤：</h6><p><img src="/images/pasted-16.png" alt="upload successful"></p><p><img src="/images/pasted-17.png" alt="upload successful"></p><p><img src="/images/pasted-18.png" alt="upload successful"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h6 id=&quot;问题：清理服务器时，误删除了数据库的dbf文件，且未备份，导致今天在启动数据库时无法启动，经网上查找资料和参考，整理方法如下：&quot;&gt;&lt;a href=&quot;#问题：清理服务器时，误删除了数据库的dbf文件，且未备份，导致今天在启动数据库时无法启动，经网上查找资料和参考，整
+      
+    
+    </summary>
+    
+      <category term="oracle" scheme="http://feyfey.online/categories/oracle/"/>
+    
+    
+      <category term="oracle" scheme="http://feyfey.online/tags/oracle/"/>
+    
+  </entry>
   
   <entry>
     <title>新建工程并关联提交到Github</title>
