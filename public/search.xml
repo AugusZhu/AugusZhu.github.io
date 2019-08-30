@@ -5,10 +5,10 @@
     <url>%2F2019%2F08%2F28%2F%E6%89%8B%E5%8A%A8%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84dbf%E6%96%87%E4%BB%B6%E5%AF%BC%E8%87%B4%E9%94%99%E8%AF%AF%2F</url>
     <content type="text"><![CDATA[问题：清理服务器时，误删除了数据库的dbf文件，且未备份，导致今天在启动数据库时无法启动，经网上查找资料和参考，整理方法如下：操作步骤：]]></content>
       <categories>
-        <category>oracle</category>
+        <category>Oracle</category>
       </categories>
       <tags>
-        <tag>oracle</tag>
+        <tag>Oracle</tag>
       </tags>
   </entry>
   <entry>
@@ -16,10 +16,10 @@
     <url>%2F2019%2F08%2F26%2F%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B%E5%B9%B6%E5%85%B3%E8%81%94%E6%8F%90%E4%BA%A4%E5%88%B0Github%2F</url>
     <content type="text"><![CDATA[cd进入你放项目文件的地址，我的地址在D:\WORK\项目程序 输入git init 这个意思是在当前项目的目录中生成本地的git管理（会发现在当前目录下多了一个.git文件夹） 输入git add 这个是将项目上所有的文件添加到仓库中的意思，如果想添加某个特定的文件，只需把.换成这个特定的文件名即可。 输入git commit -m &quot;first commit&quot;表示你对这次提交的注释，双引号里面的内容可以根据个人的需要改。 输入git remote add origin https://自己的gihub仓库url地址,将本地的仓库关联到github上,这里本人输入的是git remote add origin https://github.com/AugusZhu/JavaTools.git 输入git push -u origin master，这是把代码上传到github远程仓库 踩坑注意 若第五步报错如下 To https://github.com/AugusZhu/JavaTools.git ! [rejected] master -&gt; master (fetch first) error: failed to push some refs to ‘https://github.com/AugusZhu/JavaTools.git&#39; 原因：本地没有update到最新版本的项目（git上有README.md文件没下载下来） 解决办法：git pull --rebase origin master可以看到，此时已经把github上最新的文件下载下来了, 接着再 git push origin master]]></content>
       <categories>
-        <category>github</category>
+        <category>Github</category>
       </categories>
       <tags>
-        <tag>github</tag>
+        <tag>Github</tag>
       </tags>
   </entry>
   <entry>
