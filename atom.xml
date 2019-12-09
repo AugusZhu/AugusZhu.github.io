@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://feyfey.online/"/>
-  <updated>2019-12-09T09:21:26.749Z</updated>
+  <updated>2019-12-09T09:37:04.455Z</updated>
   <id>http://feyfey.online/</id>
   
   <author>
@@ -18,10 +18,10 @@
   
   <entry>
     <title>导入安全证书到jdk默认库</title>
-    <link href="http://feyfey.online/2019/12/09/Untitled/"/>
-    <id>http://feyfey.online/2019/12/09/Untitled/</id>
+    <link href="http://feyfey.online/2019/12/09/%E5%AF%BC%E5%85%A5%E5%AE%89%E5%85%A8%E8%AF%81%E4%B9%A6%E5%88%B0jdk%E9%BB%98%E8%AE%A4%E5%BA%93/"/>
+    <id>http://feyfey.online/2019/12/09/导入安全证书到jdk默认库/</id>
     <published>2019-12-09T09:12:46.000Z</published>
-    <updated>2019-12-09T09:21:26.749Z</updated>
+    <updated>2019-12-09T09:37:04.455Z</updated>
     
     <content type="html"><![CDATA[<ol><li>把证书上传到数据库服务器</li><li>目录切换到oracle的bin目录下执行以下命令：</li></ol><h5 id="创建wallet"><a href="#创建wallet" class="headerlink" title="创建wallet"></a>创建wallet</h5><p><code>orapki wallet create –wallet &quot;F:/cert_file/cert&quot;  –pwd PASS1!2@3# -auto_login</code></p><h5 id="添加信任证书"><a href="#添加信任证书" class="headerlink" title="添加信任证书"></a>添加信任证书</h5><p><code>orapki wallet add -wallet F:\cert_file\cert -trusted_cert -cert &quot;F:\hls_file\cert\paytest.cer&quot; -pwd PASS1!2@3#</code></p><h5 id="查看wallet里面的证书"><a href="#查看wallet里面的证书" class="headerlink" title="查看wallet里面的证书"></a>查看wallet里面的证书</h5><p><code>orapki wallet display -wallet F:\cert_file\cert -pwd PASS1!2@3#</code></p>]]></content>
     
@@ -38,6 +38,10 @@
     
     </summary>
     
+      <category term="Oracle" scheme="http://feyfey.online/categories/Oracle/"/>
+    
+    
+      <category term="Oracle" scheme="http://feyfey.online/tags/Oracle/"/>
     
   </entry>
   
